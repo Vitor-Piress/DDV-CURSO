@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercício - Página de Login</title>
+    <link rel="stylesheet" href="./Styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <section>
+        <header>
+          <img src="Assets/ingram-icon.png" alt="Ingram Logo" />
+        </header>
+        <form>
+          <h2>Criar a sua conta</h2>
+          <div class="floatingLabel">
+            <input type="text" id="fullName" />
+            <label for="fullName" id="fullNameLabel">Nome Completo</label>
+          </div>
+          <input type="text" id="nickname" placeholder="Nome de usuário" />
+          <input type="text" id="mailphone" placeholder="Celular ou email" />
+          <input type="password" id="password" placeholder="Senha" />
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirmar senha"
+          />
+          <div id="date">
+            <label for="birthDate">Data de nascimento</label>
+            <div id="dateSelector">
+              <select name="day" id="day">
+                <option value="day">Dia</option>
+              </select>
+              <select name="month" id="month">
+                <option value="month">Mês</option>
+              </select>
+              <select name="year" id="year">
+                <option value="year">Ano</option>
+              </select>
+            </div>
+          </div>
+          <footer>
+            <p>Já possui uma conta? <a href="#">Entrar</a></p>
+            <button class="signUp" type="button">Cadastre-se</button>
+          </footer>
+        </form>
+      </section>
+      <aside>
+        <img src="Assets/man.png" alt="Man Photo" />
+      </aside>
+    </main>
+  </body>
+</html>
