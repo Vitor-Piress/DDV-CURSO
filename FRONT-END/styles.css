@@ -1,0 +1,70 @@
+#email {
+  background-color: lightgray;
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+}
+
+input {
+  color: red;
+}
+
+#email:focus {
+  outline: 2px solid red;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid lightgray;
+}
+
+button:active {
+  background-color: red;
+}
+
+li:first-child {
+  color: red;
+}
+
+li:nth-child(even) {
+  color: blue;
+}
+
+h1::before {
+  content: "😬";
+  border-radius: 100%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+#cat-container {
+  width: 100px;
+  height: 100px;
+}
+
+img {
+  border: 1px solid lightgray;
+  border-radius: 100%;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0px 0px 6px lightgray;
+}
+
+#img-bg-container {
+  background-color: lightblue;
+  margin: 2rem;
+  height: 500px;
+  width: 500px;
+  background-size: cover;
+  background-image: url("./Assets/pattern.jpg");
+  background-repeat: no-repeat;
+}
+
+#linear-gradient {
+  height: 500px;
+  background: linear-gradient(90deg, lightblue, lightgreen);
+}

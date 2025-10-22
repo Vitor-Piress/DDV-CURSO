@@ -1,0 +1,36 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+div {
+  background-color: lightblue;
+  padding: 10px;
+}
+
+.flexi div {
+  background: lightcoral;
+}
+
+.flexi {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.flexi:nth-child(1) div:nth-child(2) {
+  flex: 2;
+}
+
+.flexi:nth-child(1) div:nth-child(3) {
+  flex: 1;
+}
+
+.flexi:nth-child(2) {
+  flex-direction: column;
+  margin-top: 10px;
+}
