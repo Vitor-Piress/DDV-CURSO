@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../Scripts/Scripts.js" defer></script>
+    <link rel="stylesheet" href="../Styles/Styles.css" />
+  </head>
+  <body>
+    <form id="form">
+      <h1>Cadastro</h1>
+      <div class="field-container">
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="inputName" />
+      </div>
+      <div class="field-container">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+        <span class="error-message"></span>
+      </div>
+      <div class="field-container">
+        <label for="occupation">Profissão</label>
+        <select name="occupation" id="occupation"></select>
+      </div>
+      <div class="fiel-container">
+        <span id="hobbies">Gostos</span>
+        <div class="checkbox-container">
+          <div id="container-music">
+            <label for="music">Música</label>
+            <input type="checkbox" name="hobbies" value="music" id="music" />
+          </div>
+          <div id="container-code">
+            <label for="code">Programar</label>
+            <input type="checkbox" name="hobbies" value="code" id="code" />
+          </div>
+        </div>
+        <span id="hobbiesError" class="error-message"></span>
+      </div>
+      <button id="submit-button">Cadastrar</button>
+    </form>
+  </body>
+</html>
