@@ -6,6 +6,8 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
   position: relative;
   display: flex;
   justify-content: center;
@@ -14,6 +16,8 @@ body {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   background-color: #191f28;
   padding: 2rem;
   width: 700px;
@@ -26,6 +30,7 @@ header {
   align-items: center;
   flex-direction: column;
   margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 h1 {
@@ -60,6 +65,13 @@ input {
   opacity: 0;
 }
 
+section#tasks {
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 #check-icon {
   display: flex;
   justify-content: center;
@@ -80,6 +92,13 @@ input {
   cursor: pointer;
 }
 
+#Task-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
 .checked {
   #Task-text {
     text-decoration: line-through;
@@ -95,6 +114,10 @@ input {
   justify-content: space-between;
   padding: 0 10px;
   border-bottom: 2px solid #24395d;
+}
+
+.Task-Card:last-child {
+  border-bottom: none;
 }
 
 #Task-Name {
@@ -163,10 +186,18 @@ input {
   padding: 1rem 1.2rem;
   min-width: 200px;
   border-radius: 12px;
-  background-color: #c31717;
   color: #fff;
   font-weight: 600;
-  border: 2px solid #f06d6d;
+}
+
+.blue {
+  background-color: #24395d;
+  border: 2px solid #6dc4f0;
+}
+
+.red {
+  background-color: #c31717;
+  border: 2px solid #e46b6b;
 }
 
 @keyframes animation {
