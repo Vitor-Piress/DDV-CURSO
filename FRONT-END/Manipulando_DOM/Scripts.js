@@ -9,12 +9,52 @@ const check_button = document.getElementsByClassName("Check-Button");
 const task_section = document.getElementById("tasks");
 const body = document.querySelector("body");
 
+let items = [];
+
+/* ------------------------------- Alert ------------------------------- */
+
+function Alert(text, color) {
+  const blockAlert = `<path d="m15 9-6 6"></path>
+  <path d="m9 9 6 6"></path>`;
+  const infoAlert = `<path d="M12 16v-4"></path>
+  <path d="M12 8h.01"></path>`;
+  let reason;
+
+  switch (color) {
+    case "red":
+      reason = blockAlert;
+      break;
+    case "blue":
+      reason = infoAlert;
+      break;
+  }
+
+  const html = `<div id="alert" class="${color}">
+      <svg class="alert-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"></circle>
+  ${reason}
+</svg>
+      ${text}
+    </div>`;
+
+  return html;
+}
+
 /* ------------------------------- HTML Constructor ------------------------------- */
 
-function TaskCardConstructor(title) {
-  const html = `<div class="Task-Card">
+function TaskCardConstructor(id, title, isChecked) {
+  switch (isChecked) {
+    case true:
+      checked = "checked";
+      break;
+    case false:
+      checked = "";
+      break;
+  }
+
+  const html = `<div class="Task-Card ${checked}" checked="${isChecked}" data-id="${id}">
           <div id="Task-Name">
-            <div class="Check-Button">
+            <div class="Check-Button" >
             <div class="hidden" id="check-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <polyline points="20 6 9 17 4 12"></polyline>
 </svg></div>
@@ -57,40 +97,102 @@ function TaskCardConstructor(title) {
   return html;
 }
 
-/* ------------------------------- Alert ------------------------------- */
+/* ------------------------------- Listenners ------------------------------- */
 
-function Alert(text, color) {
-  const blockAlert = `<path d="m15 9-6 6"></path>
-  <path d="m9 9 6 6"></path>`;
-  const infoAlert = `<path d="M12 16v-4"></path>
-  <path d="M12 8h.01"></path>`;
-  let reason;
+// Delete Task
+task_section.addEventListener("click", (event) => {
+  // Encontra o botao Delete mais próximo
+  const deleteBtn = event.target.closest(".Delete-Button");
+  if (deleteBtn) {
+    const card = deleteBtn.closest(".Task-Card");
+    const itemId = card.getAttribute("data-id");
 
-  switch (color) {
-    case "red":
-      reason = blockAlert;
-      break;
-    case "blue":
-      reason = infoAlert;
-      break;
+    items = items.filter((item) => item.id !== Number(itemId));
+    localStorage.setItem("items", JSON.stringify(items));
+
+    card.style.animation = "deleteFadeOut 0.5s";
+    setTimeout(() => {
+      card.remove();
+    }, 450);
+  }
+});
+
+// Edit Task
+task_section.addEventListener("click", (event) => {
+  // Encontra o botao Edit mais próximo
+  const editBtn = event.target.closest(".Edit-Button");
+
+  if (editBtn) {
+    if (task_input.value === "") {
+      body.insertAdjacentHTML(
+        "beforeend",
+        Alert(
+          "Para alterar uma tarefa, digite o novo título no campo de entrada!",
+          "blue",
+        ),
+        setTimeout(() => {
+          const alert = document.getElementById("alert");
+          alert.style.opacity = "0";
+
+          setTimeout(() => alert.remove(), 1000);
+        }, 5000),
+      );
+      return;
+    }
+    // Encontra o card mais próximo
+    const card = event.target.closest(".Task-Card");
+    const task_title = card.querySelector("#Task-text");
+    const itemId = card.getAttribute("data-id");
+
+    const item = items.find((item) => item.id === Number(itemId));
+    item.title = task_input.value;
+    localStorage.setItem("items", JSON.stringify(items));
+
+    task_title.textContent = task_input.value;
+    task_input.value = "";
+  }
+});
+
+// Check Task
+task_section.addEventListener("click", (event) => {
+  // Encontra o botao Check mais próximo
+  const checkBtn = event.target.closest(".Check-Button");
+
+  if (checkBtn) {
+    // Encontra o card mais próximo
+    const card = event.target.closest(".Task-Card");
+    const itemId = card.getAttribute("data-id");
+
+    const item = items.find((item) => item.id === Number(itemId));
+    card.classList.toggle("checked");
+    item.checked = card.classList.contains("checked");
+    localStorage.setItem("items", JSON.stringify(items));
+  }
+});
+
+/* ------------------------------- Local Storage Load Function ------------------------------- */
+
+function loadItems() {
+  const itemsFromStorage = localStorage.getItem("items");
+
+  if (!itemsFromStorage) {
+    return;
   }
 
-  const html = `<div id="alert" class="${color}">
-      <svg class="alert-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="10"></circle>
-  ${reason}
-</svg>
-      ${text}
-    </div>`;
+  items = JSON.parse(itemsFromStorage);
 
-  return html;
+  for (const item of items) {
+    const listItem = TaskCardConstructor(item.id, item.title, item.checked);
+    task_section.insertAdjacentHTML("afterbegin", listItem);
+  }
 }
 
-/* ------------------------------- Functions ------------------------------- */
+/* ------------------------------- Submit Listener ------------------------------- */
 
-// Add Task
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  const itemId = new Date().getTime();
+  const title = task_input.value;
 
   if (task_input.value == "") {
     body.insertAdjacentHTML(
@@ -121,67 +223,18 @@ form.addEventListener("submit", (event) => {
   }
   task_section.insertAdjacentHTML(
     "afterbegin",
-    TaskCardConstructor(task_input.value),
+    TaskCardConstructor(itemId, title, false),
   );
+
+  items.push({
+    id: itemId,
+    title: task_input.value,
+    checked: false,
+  });
+  localStorage.setItem("items", JSON.stringify(items));
 
   task_input.value = "";
 });
 
-// Delete Task
-task_section.addEventListener("click", (event) => {
-  // Encontra o botao Delete mais próximo
-  const deleteBtn = event.target.closest(".Delete-Button");
-  if (deleteBtn) {
-    const card = deleteBtn.closest(".Task-Card");
-    card.style.animation = "deleteFadeOut 0.5s";
-    setTimeout(() => {
-      card.remove();
-    }, 450);
-  }
-});
-
-// Edit Task
-task_section.addEventListener("click", (event) => {
-  // Encontra o botao Edit mais próximo
-  const editBtn = event.target.closest(".Edit-Button");
-
-  if (editBtn) {
-    if (task_input.value == "") {
-      body.insertAdjacentHTML(
-        "beforeend",
-        Alert(
-          "Para alterar uma tarefa, digite o novo título no campo de entrada!",
-          "blue",
-        ),
-        setTimeout(() => {
-          const alert = document.getElementById("alert");
-          alert.style.opacity = "0";
-
-          setTimeout(() => alert.remove(), 1000);
-        }, 5000),
-      );
-      return;
-    }
-    // Encontra o card mais próximo
-    const card = event.target.closest(".Task-Card");
-    const task_title = card.querySelector("#Task-text");
-
-    task_title.textContent = task_input.value;
-    task_input.value = "";
-  }
-});
-
-// Check Task
-task_section.addEventListener("click", (event) => {
-  // Encontra o botao Check mais próximo
-  const editBtn = event.target.closest(".Check-Button");
-
-  if (editBtn) {
-    // Encontra o card mais próximo
-    const card = event.target.closest(".Task-Card");
-
-    const check_icon = card.querySelector("#check-icon");
-    card.classList.toggle("checked");
-    check_icon.classList.toggle("hidden");
-  }
-});
+// Calling Locas Storage Function
+loadItems();

@@ -52,6 +52,10 @@ h1 {
   width: 100%;
 }
 
+button:hover {
+  opacity: 0.8;
+}
+
 input {
   width: 100%;
   padding: 12px 24px;
@@ -59,10 +63,6 @@ input {
   background-color: #343b47;
   border-radius: 5px;
   color: #696d75;
-}
-
-.hidden {
-  opacity: 0;
 }
 
 section#tasks {
@@ -103,6 +103,13 @@ section#tasks {
   #Task-text {
     text-decoration: line-through;
   }
+  #check-icon {
+    display: block;
+  }
+}
+
+#check-icon {
+  display: none;
 }
 
 .Task-Card {
