@@ -1,3 +1,6 @@
+/* ------------------------------- HTML Instantiation -------------------------------  */
+
+const form = document.getElementById("Input-Container");
 const task_input = document.getElementById("Task-Input");
 const submit_button = document.getElementById("Submit-Button");
 const delete_button = document.getElementsByClassName("Delete-Button");
@@ -5,6 +8,8 @@ const edit_button = document.getElementsByClassName("Edit-Button");
 const check_button = document.getElementsByClassName("Check-Button");
 const task_section = document.getElementById("tasks");
 const body = document.querySelector("body");
+
+/* ------------------------------- HTML Constructor ------------------------------- */
 
 function TaskCardConstructor(title) {
   const html = `<div class="Task-Card">
@@ -52,10 +57,12 @@ function TaskCardConstructor(title) {
   return html;
 }
 
+/* ------------------------------- Alert ------------------------------- */
+
 function Alert(text, color) {
-  blockAlert = `<path d="m15 9-6 6"></path>
+  const blockAlert = `<path d="m15 9-6 6"></path>
   <path d="m9 9 6 6"></path>`;
-  infoAlert = `<path d="M12 16v-4"></path>
+  const infoAlert = `<path d="M12 16v-4"></path>
   <path d="M12 8h.01"></path>`;
   let reason;
 
@@ -79,8 +86,12 @@ function Alert(text, color) {
   return html;
 }
 
+/* ------------------------------- Functions ------------------------------- */
+
 // Add Task
-submit_button.addEventListener("click", () => {
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
   if (task_input.value == "") {
     body.insertAdjacentHTML(
       "beforeend",
@@ -95,6 +106,7 @@ submit_button.addEventListener("click", () => {
     return;
   }
 
+  // Caso input seja muito extenso alerta o usuário
   if (task_input.value.length >= 34) {
     body.insertAdjacentHTML(
       "beforeend",
