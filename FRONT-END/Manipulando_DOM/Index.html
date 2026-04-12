@@ -6,7 +6,13 @@
     <title>DDV To Do List - Manipulando DOM</title>
     <link rel="stylesheet" href="Index.css" />
     <script defer src="Scripts.js"></script>
+    <link
+      rel="shortcut icon"
+      href="Assets/to-do-list.png"
+      type="image/x-icon"
+    />
   </head>
+
   <body>
     <main>
       <header id="header">
@@ -30,15 +36,15 @@
             </svg>
           </div>
         </div>
-        <div id="Input-Container">
+        <form id="Input-Container">
           <input
             id="Task-Input"
-            class="Task-Input"
+            name="Item-Name"
             type="text"
             placeholder="O que precisa ser feito?"
           />
           <button id="Submit-Button">Cadastrar</button>
-        </div>
+        </form>
       </header>
       <section id="tasks"></section>
     </main>
