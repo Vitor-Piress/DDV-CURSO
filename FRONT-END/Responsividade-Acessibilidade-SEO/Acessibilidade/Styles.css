@@ -1,0 +1,6 @@
+div[aria-live="polite"] {
+  margin: 2rem 0;
+  width: 50%;
+  height: 50px;
+  overflow: hidden;
+}

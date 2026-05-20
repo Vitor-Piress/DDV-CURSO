@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsividade, Acessibilidade & SEO</title>
+    <link rel="stylesheet" href="Styles.css" />
+    <script src="Script.js" defer></script>
+  </head>
+  <body>
+    <button
+      aria-expanded="false"
+      aria-controls="dropdown"
+      onclick="toggleDropdown(this)"
+    >
+      Show Options
+    </button>
+    <ul id="dropdown" hidden>
+      <li>option1</li>
+      <li>option2</li>
+      <li>option3</li>
+    </ul>
+    <script>
+      function toggleDropdown(button) {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", !expanded);
+        document.getElementById("dropdown").hidden = expanded;
+      }
+    </script>
+
+    <div aria-live="polite">Mensagens aparecerão aqui!</div>
+    <script>
+      const divMessage = document.querySelector('[aria-live="polite"]');
+      setInterval(() => {
+        const span = document.createElement("span");
+        span.textContent = "Mensagem Nova!";
+        divMessage.append(span);
+      }, 500);
+    </script>
+
+    <div id="loading" aria-busy="true">Carregando...</div>
+    <script>
+      setTimeout(() => {
+        document.getElementById("loading").setAttribute("aria-busy", false);
+        document.getElementById("loading").textContent =
+          "Carregamento concluído!";
+      }, 3000);
+    </script>
+
+    <span aria-hidden="true">*</span>
+  </body>
+</html>

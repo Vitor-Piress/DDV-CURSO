@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header Responsivo</title>
+    <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Kirang+Haerang&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div id="logo-container">
+        <img src="Assets/menu-bar.png" alt="menu-options-icon" id="menu-img" />
+        <img src="Assets/hamburger.svg" alt="hamburguer-icon" />
+        Hamburguer.com
+      </div>
+      <div id="options">
+        <button id="home-btn">
+          <img src="Assets/house.svg" alt="house-icon" />
+          Início
+        </button>
+        <button id="menu-btn">
+          <img
+            src="Assets/menu-restaurant-stroke-rounded.svg"
+            alt="mnenu-icon"
+          />
+          Cardápio
+        </button>
+        <button id="news-btn">
+          <img src="Assets/warning.png" alt="news-icon" style="width: 22px" />
+          Lançamentos
+        </button>
+        <button id="delivery-btn">
+          <img
+            src="Assets/delivery.png"
+            alt="delivery-icon"
+            style="width: 22px"
+          />
+          Delivery
+        </button>
+      </div>
+      <div id="login">
+        <button id="login-btn">Entrar</button>
+      </div>
+    </header>
+    <div id="overlay-container" class="hidden">
+      <div id="overlay-shadow"></div>
+      <div id="overlay-content">
+        <div id="overlay-options">
+          <button id="home-btn">
+            <img src="Assets/house.svg" alt="house-icon" />
+            Início
+          </button>
+          <button id="menu-btn">
+            <img
+              src="Assets/menu-restaurant-stroke-rounded.svg"
+              alt="mnenu-icon"
+            />
+            Cardápio
+          </button>
+          <button id="news-btn">
+            <img src="Assets/warning.png" alt="news-icon" style="width: 22px" />
+            Lançamentos
+          </button>
+          <button id="delivery-btn">
+            <img
+              src="Assets/delivery.png"
+              alt="delivery-icon"
+              style="width: 22px"
+            />
+            Delivery
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

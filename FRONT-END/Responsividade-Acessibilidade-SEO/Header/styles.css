@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-style: normal;
+  color: #bda41a;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #222222;
+  padding: 0.5rem 0;
+  font-family: "Kirang Haerang", Arial, Helvetica, sans-serif;
+  z-index: 2;
+}
+
+#logo-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+#menu-img {
+  display: none;
+}
+
+#logo-container img {
+  width: 2.5rem;
+}
+
+#options,
+#login {
+  font-size: 1rem;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  gap: 5px;
+  cursor: pointer;
+}
+
+#options {
+  display: flex;
+  gap: 20px;
+}
+
+#login-btn {
+  background-color: #bda41a;
+  border-radius: 4px;
+  color: #222222;
+  padding: 4px 16px;
+  font-family: "Kirang Haerang", Arial, Helvetica, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #options {
+    display: none;
+  }
+  #logo-container {
+    gap: 15px;
+    font-size: 0;
+  }
+  #menu-img {
+    display: inline;
+    width: 20px;
+    cursor: pointer;
+    z-index: 5;
+  }
+  #overlay-shadow {
+    z-index: 0;
+    position: absolute;
+    background-color: #00000058;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+  }
+  #overlay-content {
+    position: absolute;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    background-color: #eeee;
+    z-index: 10;
+    height: 150px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 1rem;
+  }
+
+  #overlay-options {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  #overlay-options button {
+    text-shadow: 1px 1px 2px #ffffff5d;
+  }
+}
+
+@keyframes animation {
+  0% {
+    rotate: calc(0);
+  }
+  100% {
+    rotate: calc(180);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
