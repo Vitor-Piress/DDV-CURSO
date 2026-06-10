@@ -9,9 +9,12 @@
   <body>
     <form id="userForm">
       <input type="text" name="userName" id="userName" />
-      <button type="submit">Cadastrar</button>
+      <button type="submit" id="submitButton">Cadastrar</button>
     </form>
     <div>
+      <span id="loadingPlaceholder" style="display: none" aria-busy="true"
+        >Carregando...</span
+      >
       <ul id="userList"></ul>
     </div>
   </body>
