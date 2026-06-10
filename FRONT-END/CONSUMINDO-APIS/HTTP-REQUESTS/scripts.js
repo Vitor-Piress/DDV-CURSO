@@ -1,24 +1,41 @@
 const BASE_URL =
-  "https://crudcrud.com/api/05273b19a34243d783f88499b50deeef/users";
+  "https://crudcrud.com/api/bc3c4bf0f1b44ddba32b24fd365e94ce/users";
 
 const userForm = document.getElementById("userForm");
 const userNameInput = document.getElementById("userName");
 const userList = document.getElementById("userList");
-const deleteButton = document.getElementsByClassName("delete");
+const loadingPlaceholder = document.getElementById("loadingPlaceholder");
+const submitBtn = document.getElementById("submitButton");
+let isLoading = false;
+
+function setIsLoading() {
+  isLoading = true;
+  loadingPlaceholder.style.display = "block";
+  submitBtn.setAttribute("disabled", "true");
+  userList.style.display = "none";
+}
+
+function setIsNotLoading() {
+  isLoading = false;
+  loadingPlaceholder.style.display = "none";
+  submitBtn.removeAttribute("disabled");
+  userList.style.display = "block";
+}
 
 function insertOnList(name, id) {
   const li = document.createElement("li");
-  const button = document.createElement("button");
-  button.textContent = "delete";
-  button.id = id;
-  button.classList.add("delete");
   li.textContent = name;
   userList.appendChild(li);
-  li.appendChild(button);
 }
 
 userForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  if (isLoading) {
+    return;
+  }
+
+  setIsLoading();
 
   const response = await fetch(BASE_URL, {
     method: "POST",
@@ -31,29 +48,18 @@ userForm.addEventListener("submit", async (event) => {
   });
 
   const data = await response.json();
+  setIsNotLoading();
   insertOnList(data.name, data._id);
 });
 
-// Não sei se está funcionando pois consumi todo meu limite da API CRUDCRUD, último teste realizado foi com esse código e não consegui ter certeza se funcionou ou não.
-deleteButton.addEventListener("click", async (event) => {
-  event.preventDefault();
-  const ID = this.deleteButton.id;
-
-  const response = await fetch(BASE_URL + "/" + ID, {
-    method: "DELETE",
-  });
-  clearUsers();
-  loadUsers();
-});
-
-// fetch("https://crudcrud.com/api/05273b19a34243d783f88499b50deeef/users")
+// fetch("https://crudcrud.com/api/bc3c4bf0f1b44ddba32b24fd365e94ce/users")
 //   .then((response) => response.json())
 //   .then((data) => console.log("Users: ", data));
 
 // Mesmo resultado do código escrito anteriormente somente com fetch, porém agora com async await
 async function loadUsers() {
   const response = await fetch(
-    "https://crudcrud.com/api/05273b19a34243d783f88499b50deeef/users",
+    "https://crudcrud.com/api/bc3c4bf0f1b44ddba32b24fd365e94ce/users",
   );
 
   const users = await response.json();
