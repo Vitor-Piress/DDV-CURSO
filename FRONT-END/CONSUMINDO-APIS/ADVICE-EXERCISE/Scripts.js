@@ -23,7 +23,7 @@ fetch("https://api.adviceslip.com/advice", {
     adviceId.innerHTML = `Conselho <span class="highlight">#${data.slip.id}</span>`;
   });
 
-form.addEventListener("submit", (e) => {
+submitButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   if (isLoading) {
@@ -32,12 +32,11 @@ form.addEventListener("submit", (e) => {
 
   setIsLoading();
 
-  const diceImg = submitButton.querySelector("img");
-  diceImg.classList.add("roll-dice");
+  submitButton.classList.add("roll-dice");
 
   setTimeout(() => {
-    diceImg.classList.remove("roll-dice");
-  }, 1000);
+    submitButton.classList.remove("roll-dice");
+  }, 800);
 
   fetch("https://api.adviceslip.com/advice", {
     method: "GET",

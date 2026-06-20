@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advices</title>
+    <title>ViaCEP API</title>
     <script src="Scripts.js" defer></script>
     <link rel="stylesheet" href="Styles.css" />
-    <link rel="shortcut icon" href="Assets/" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,13 +14,21 @@
     />
   </head>
   <body>
-    <form id="containerForm">
-      <p id="adviceId"></p>
-      <p id="adviceText"></p>
-      <div id="line"></div>
-      <button type="submit" id="submitButton">
-        <img src="Assets/dice.png" alt="" />
-      </button>
+    <form>
+      <header id="form-header">
+        <img src="Assets/sign.png" alt="address-icon" />
+        <h1>Preencha com seu endereço</h1>
+      </header>
+      <section id="input-section">
+        <input type="text" id="cep-input" placeholder="CEP" />
+        <input type="text" id="rua-input" placeholder="Rua" />
+        <input type="text" id="bairro-input" placeholder="Bairro" />
+        <input type="number" id="numero-input" placeholder="Número" />
+        <input type="text" id="complemento-input" placeholder="Complemento" />
+        <input type="text" id="cidade-input" placeholder="Cidade" />
+        <input type="text" id="estado-input" placeholder="Estado" />
+      </section>
+      <button type="submit" id="submit-button">Prosseguir</button>
     </form>
   </body>
 </html>
