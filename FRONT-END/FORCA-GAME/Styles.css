@@ -10,6 +10,53 @@
   border: none;
 }
 
+#modal-container {
+  width: 100vw;
+  height: 100vh;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}
+
+#background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: #1e1e1e;
+  opacity: 0.9;
+  z-index: 98;
+}
+
+#pop-up-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 45.3rem;
+  max-height: 22.8rem;
+  width: 90%;
+  height: 90%;
+  padding: 4rem 9.6rem;
+  background-color: #fff;
+  position: relative;
+  opacity: 1;
+  z-index: 99;
+  border: 0.8rem #1e1e1e solid;
+}
+
+#close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#pop-up-container p {
+  font-size: 7.2rem;
+}
+
 header {
   display: flex;
   padding: 4rem 12.4rem;
@@ -33,6 +80,17 @@ header img {
   height: 52px;
 }
 
+#stick-container {
+  position: relative;
+}
+
+#stickman-img {
+  position: absolute;
+  top: 31%;
+  left: 93.5%;
+  transform: translateX(-50%); /* Ajusta para centralizar corretamente */
+}
+
 #game-container {
   display: flex;
   justify-content: space-around;
@@ -49,13 +107,11 @@ header img {
   font-size: 5rem;
 }
 
-.letter-container {
-  width: 7.2rem;
-  text-align: center;
-}
-
 .letter {
   border-bottom: 1.1rem #1e1e1e solid;
+  text-align: center;
+  width: 7.2rem;
+  height: 7.2rem;
 }
 
 #line-01,
@@ -79,4 +135,45 @@ header img {
   height: 100%;
   width: 100%;
   text-align: center;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+button:disabled {
+  background-color: #a3a3a3;
+  color: #c3c3c3;
+  border: 0.8rem #c3c3c3 solid;
+}
+
+#close-button {
+  background-color: #e1d9d9;
+}
+
+#close-button:hover {
+  background-color: #e26666;
+}
+
+#restart-button.rotating {
+  animation: rotate 0.7s ease forwards;
+}
+
+#pause-button {
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-45deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
