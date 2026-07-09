@@ -104,14 +104,27 @@ header img {
 }
 
 #word-container p {
-  font-size: 5rem;
+  font-size: clamp(2rem, 4vw, 5rem);
 }
 
 .letter {
-  border-bottom: 1.1rem #1e1e1e solid;
+  border-bottom: clamp(0.6rem, 1.2vw, 1.1rem) #1e1e1e solid;
   text-align: center;
-  width: 7.2rem;
-  height: 7.2rem;
+  width: clamp(3.6rem, 8vw, 7.2rem);
+  height: clamp(3.6rem, 8vw, 7.2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win {
+  background-color: chartreuse;
+  border-bottom: clamp(0.6rem, 1.2vw, 1.1rem) rgb(82, 161, 2) solid;
+}
+
+.loose {
+  background-color: crimson;
+  border-bottom: clamp(0.6rem, 1.2vw, 1.1rem) rgb(139, 16, 41) solid;
 }
 
 #line-01,

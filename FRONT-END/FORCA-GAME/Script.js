@@ -6,7 +6,23 @@ const closeButton = document.getElementById("close-button");
 const restartButton = document.getElementById("restart-button");
 const pauseButton = document.getElementById("pause-button");
 
-const word = "LARANJA";
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+const frutas = [
+  "LARANJA",
+  "ABACAXI",
+  "UVA",
+  "ABACATE",
+  "LIMAO",
+  "BANANA",
+  "MORANGO",
+  "PITAYA",
+  "MANGA",
+];
+
+const word = frutas[getRandomInt(9)];
 
 let vida = 1;
 
@@ -26,6 +42,7 @@ function loadWord() {
   }
 }
 loadWord();
+
 const lettersWord = document.querySelectorAll(".letter");
 
 lettersKeys.forEach((element) => {
@@ -48,14 +65,31 @@ lettersKeys.forEach((element) => {
         modal.style.display = "flex";
         lettersKeys.forEach((element) => {
           element.setAttribute("disabled", true);
+          element.classList.add("loose");
         });
         Array.from(lettersWord).forEach((element) => {
           element.textContent = element.value;
+          element.classList.add("loose");
         });
       }
     }
 
     element.setAttribute("disabled", true);
+
+    const blank = Array.from(lettersWord).every(
+      (letter) => letter.textContent != "",
+    );
+
+    if (blank) {
+      if (vida < 6) {
+        lettersKeys.forEach((letter) => {
+          letter.setAttribute("disabled", true);
+        });
+        lettersWord.forEach((letter) => {
+          letter.classList.add("win");
+        });
+      }
+    }
   });
 });
 
@@ -77,4 +111,69 @@ restartButton.addEventListener("animationend", () => {
 
 pauseButton.addEventListener("click", () => {
   modal.style.display = "flex";
+});
+
+document.addEventListener("keydown", (e) => {
+  const tecla = event.key;
+
+  if (!/^[A-Za-z]$/.test(tecla)) {
+    return;
+  }
+
+  if (vida === 6) {
+    return;
+  }
+
+  const found = Array.from(lettersWord).some(
+    (letter) => letter.value === e.key.toUpperCase(),
+  );
+
+  if (found) {
+    lettersWord.forEach((letter) => {
+      if (letter.value === e.key.toUpperCase()) {
+        letter.textContent = e.key.toUpperCase();
+      }
+    });
+  } else {
+    vida++;
+    stickmanImg.src = `Assets/0${vida}.svg`;
+    if (vida === 6) {
+      modal.classList.remove("hidden");
+      modal.style.display = "flex";
+      lettersKeys.forEach((element) => {
+        element.setAttribute("disabled", true);
+      });
+      Array.from(lettersWord).forEach((element) => {
+        element.textContent = element.value;
+        element.classList.add("loose");
+      });
+    }
+  }
+
+  const foundKey = Array.from(lettersKeys).some(
+    (letter) => letter.value === e.key.toUpperCase(),
+  );
+
+  if (foundKey) {
+    lettersKeys.forEach((letter) => {
+      if (letter.value === e.key.toUpperCase()) {
+        letter.setAttribute("disabled", true);
+      }
+    });
+  }
+
+  const blank = Array.from(lettersWord).every(
+    (letter) => letter.textContent != "",
+  );
+
+  if (blank) {
+    if (vida < 6) {
+      lettersKeys.forEach((letter) => {
+        letter.setAttribute("disabled", true);
+      });
+      lettersWord.forEach((letter) => {
+        letter.classList.add("win");
+      });
+    }
+  }
 });
