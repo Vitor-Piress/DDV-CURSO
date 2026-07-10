@@ -1,7 +1,7 @@
 import { Book } from "./book.js";
 
 export class User {
-  public id: number;
+  public readonly id: number;
   public name: string;
   public booksHistory: Book[] = [];
 

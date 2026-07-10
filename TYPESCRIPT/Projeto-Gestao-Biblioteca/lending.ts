@@ -1,10 +1,9 @@
-import { Book } from "./book.js";
+// import { Book } from "./book.js";
 // import { User } from "./user.js";
 
-export enum BookStatus {
-  AVAILABLE = "AVAILABLE",
-  CHECKEDOUT = "CHECKED OUT",
-  UNAVAILABLE = "UNAVAILABLE",
+export enum LendingStatus {
+  CHECKEDOUT = "CHECKEDOUT",
+  RETURNED = "RETURNED",
   DELAYED = "DELAYED",
 }
 
@@ -13,8 +12,9 @@ export class Lending {
   public readonly idBook: number;
   public readonly idUser: number;
   public dateCheckedOut: Date;
-  public dateReturn: Date;
-  public status: BookStatus;
+  public dueDate: Date;
+  public dateReturn?: Date;
+  public status: LendingStatus;
 
   constructor(
     id: number,
@@ -27,14 +27,17 @@ export class Lending {
     this.idUser = idUser;
 
     this.dateCheckedOut = new Date();
-    this.status = BookStatus.CHECKEDOUT;
+    this.status = LendingStatus.CHECKEDOUT;
 
-    const dateReturn = new Date();
-    dateReturn.setDate(dateReturn.getDate() + daysToReturn);
-    this.dateReturn = dateReturn;
+    const previewDueDate = new Date();
+    previewDueDate.setDate(previewDueDate.getDate() + daysToReturn);
+    this.dueDate = previewDueDate;
   }
 
   public finalizarEmprestimo(): void {
-    this.status = BookStatus.AVAILABLE;
+    this.status = LendingStatus.RETURNED;
+
+    const dateReturn = new Date();
+    this.dateReturn = dateReturn;
   }
 }

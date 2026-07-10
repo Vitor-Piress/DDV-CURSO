@@ -1,14 +1,16 @@
-import { BookStatus } from "./lending.js";
-
+export enum BookStatus {
+  AVAILABLE = "AVAILABLE",
+  UNAVAILABLE = "UNAVAILABLE",
+}
 export class Book {
   public readonly id: number;
-  public bookName: string;
+  public title: string;
   public author: string;
   public status: BookStatus;
 
-  constructor(id: number, bookName: string, author: string) {
+  constructor(id: number, title: string, author: string) {
     this.id = id;
-    this.bookName = bookName;
+    this.title = title;
     this.author = author;
     this.status = BookStatus.AVAILABLE;
   }
